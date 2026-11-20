@@ -1,1 +1,13 @@
-# HAM10000_tabular_vs_cnn_vs_multimodal-
+# Multimodal Skin Lesion Classification
+
+This project explores multimodal deep learning for multi-class skin lesion classification using the HAM10000 dataset. It investigates whether combining dermoscopic image information with patient-related metadata can improve classification performance compared with using either data source alone.
+
+The dataset contains 10,015 dermoscopic images across seven diagnostic categories: actinic keratoses and intraepithelial carcinoma (akiec), basal cell carcinoma (bcc), benign keratosis-like lesions (bkl), dermatofibroma (df), melanoma (mel), melanocytic nevi (nv), and vascular lesions (vasc). The project also uses available tabular metadata, including age, sex, and anatomical localization. Because the classes are imbalanced, evaluation considers metrics beyond accuracy, especially macro-averaged F1-score.
+
+The workflow includes exploratory data analysis, image and tabular preprocessing, and a grouped training, validation, and test split based on lesion identifiers. Grouping by lesion helps prevent images of the same lesion from appearing in different data partitions. Tabular preprocessing is fitted using the training data, and class weighting and image augmentation are used as part of the training strategy.
+
+Three approaches are compared. The tabular-only approach uses metadata with classical machine learning models, including Random Forest and XGBoost. The image-only approach uses a custom convolutional neural network (CNN) designed and trained from scratch, without pretrained weights. The multimodal approach combines an image feature branch with a tabular feature branch, then fuses their learned representations for seven-class prediction.
+
+The executed experiments show that the multimodal model achieved the strongest overall test performance among the compared approaches, with 63.16% accuracy, a macro-F1 score of 0.4334, and a weighted-F1 score of 0.6684. The image-only CNN achieved 49.95% accuracy and a macro-F1 score of 0.3309, while the Random Forest tabular baseline achieved 43.30% accuracy and a macro-F1 score of 0.2233. The notebook also includes confusion matrices, per-class evaluation, learning curves, and lesion-level bootstrap confidence intervals.
+
+This repository is intended for educational and experimental purposes. The results should not be interpreted as clinical validation or used to make medical decisions. The project highlights the potential value of multimodal learning while acknowledging dataset imbalance, classification difficulty across minority classes, and the need for further validation, additional experiments, and broader evaluation before any real-world application.
